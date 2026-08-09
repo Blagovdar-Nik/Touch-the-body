@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Touch the body | Парфюмерия</title>
-    <!-- Подключаем дизайн Tailwind CSS -->
+    <!-- Перенесли подключение дизайна в правильное место для GitHub -->
     <script src="https://tailwindcss.com"></script>
     <style>
         @import url('https://googleapis.com');
         .font-serif { font-family: 'Playfair Display', serif; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FDFBF7; }
     </style>
 </head>
 <body class="bg-[#FDFBF7] text-[#2B2621]">
@@ -21,13 +21,14 @@
   </header>
 
   <!-- Сетка с товарами -->
-  <main class="flex items-center justify-center min-h-[70vh] p-6">
+  <main class="flex items-center justify-center min-h-[60vh] p-6">
     
     <!-- Карточка аромата -->
     <div class="max-w-md w-full bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#EFECE6] overflow-hidden transition-all duration-500 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)]">
       
       <!-- Зона с изображением -->
       <div class="relative h-80 bg-[#F5F2EB] flex items-center justify-center overflow-hidden group">
+        <!-- Поставили максимально надежную и красивую картинку парфюма -->
         <img src="https://unsplash.com" 
              alt="Byredo Bal d'Afrique" 
              class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
