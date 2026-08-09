@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Touch the body | Парфюмерия</title>
-    <!-- Перенесли подключение дизайна в правильное место для GitHub -->
     <script src="https://tailwindcss.com"></script>
     <style>
         @import url('https://googleapis.com');
@@ -28,7 +27,6 @@
       
       <!-- Зона с изображением -->
       <div class="relative h-80 bg-[#F5F2EB] flex items-center justify-center overflow-hidden group">
-        <!-- Поставили максимально надежную и красивую картинку парфюма -->
         <img src="https://unsplash.com" 
              alt="Byredo Bal d'Afrique" 
              class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -52,25 +50,33 @@
           <p class="text-sm text-[#4E473F]"><strong class="font-medium text-[#2B2621]">Шлейф:</strong> Черная амбра, Мускус, Марокканский кедр</p>
         </div>
 
-        <!-- Кнопки заказа -->
+        <!-- Кнопки заказа (Сетка перестроена на 3 колонки) -->
         <div>
           <p class="text-xs uppercase tracking-widest text-[#8C8275] font-semibold mb-3">Выберите объем отливанта:</p>
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-3 gap-2">
             
+            <!-- Кнопка 2 мл -->
+            <a href="https://t.me" 
+               target="_blank" 
+               class="flex flex-col items-center justify-center border border-[#D1C9BC] py-3 px-2 rounded-xl text-center transition-all duration-300 hover:bg-[#2B2621] hover:border-[#2B2621] hover:text-white group">
+              <span class="text-sm font-medium text-[#2B2621] group-hover:text-white">2 мл</span>
+              <span class="text-[10px] text-[#8C8275] mt-0.5 group-hover:text-white/80">В TG</span>
+            </a>
+
             <!-- Кнопка 5 мл -->
             <a href="https://t.me" 
                target="_blank" 
-               class="flex flex-col items-center justify-center border border-[#D1C9BC] py-3.5 px-4 rounded-xl text-center transition-all duration-300 hover:bg-[#2B2621] hover:border-[#2B2621] hover:text-white group">
-              <span class="text-base font-medium text-[#2B2621] group-hover:text-white">5 мл</span>
-              <span class="text-xs text-[#8C8275] mt-0.5 group-hover:text-white/80">Заказать в TG</span>
+               class="flex flex-col items-center justify-center border border-[#D1C9BC] py-3 px-2 rounded-xl text-center transition-all duration-300 hover:bg-[#2B2621] hover:border-[#2B2621] hover:text-white group">
+              <span class="text-sm font-medium text-[#2B2621] group-hover:text-white">5 мл</span>
+              <span class="text-[10px] text-[#8C8275] mt-0.5 group-hover:text-white/80">В TG</span>
             </a>
 
             <!-- Кнопка 10 мл -->
             <a href="https://t.me" 
                target="_blank" 
-               class="flex flex-col items-center justify-center border border-[#D1C9BC] py-3.5 px-4 rounded-xl text-center transition-all duration-300 hover:bg-[#2B2621] hover:border-[#2B2621] hover:text-white group">
-              <span class="text-base font-medium text-[#2B2621] group-hover:text-white">10 мл</span>
-              <span class="text-xs text-[#8C8275] mt-0.5 group-hover:text-white/80">Заказать в TG</span>
+               class="flex flex-col items-center justify-center border border-[#D1C9BC] py-3 px-2 rounded-xl text-center transition-all duration-300 hover:bg-[#2B2621] hover:border-[#2B2621] hover:text-white group">
+              <span class="text-sm font-medium text-[#2B2621] group-hover:text-white">10 мл</span>
+              <span class="text-[10px] text-[#8C8275] mt-0.5 group-hover:text-white/80">В TG</span>
             </a>
 
           </div>
