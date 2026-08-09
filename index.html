@@ -1,95 +1,261 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Touch the body | Парфюмерия</title>
-    <script src="https://tailwindcss.com"></script>
-    <style>
-        @import url('https://googleapis.com');
-        .font-serif { font-family: 'Playfair Display', serif; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FDFBF7; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Touch the body | Селективная парфюмерия & отливанты</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FDFBF7;
+    --paper-2:#F5F2EB;
+    --ink:#2B2621;
+    --taupe:#8C8275;
+    --line:#EFECE6;
+    --line-2:#E3DDD0;
+  }
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:400;
+  }
+  .font-serif{ font-family:'Playfair Display', serif; }
+  .tracked{ letter-spacing:.18em; }
+
+  .dusk{
+    opacity:0;
+    transform: translateY(20px);
+    transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+  }
+  .dusk.in{ opacity:1; transform:translateY(0); }
+
+  .card{
+    box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+    transition: box-shadow .5s ease, transform .5s ease;
+  }
+  .card:hover{
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    transform: translateY(-4px);
+  }
+  .card-img{ transition: transform .7s ease; }
+  .card:hover .card-img{ transform: scale(1.05); }
+
+  .vol-btn{ transition: background .3s ease, border-color .3s ease, color .3s ease; }
+  .vol-btn:hover{ background:var(--ink); border-color:var(--ink); }
+  .vol-btn:hover .vol-sub, .vol-btn:hover .vol-main{ color:#fff; }
+
+  @media (prefers-reduced-motion: reduce){
+    .dusk{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
 </head>
-<body class="bg-[#FDFBF7] text-[#2B2621]">
+<body>
 
-  <!-- Шапка сайта (Логотип) -->
-  <header class="text-center py-12 border-b border-[#EFECE6]">
-    <h1 class="text-4xl font-serif tracking-widest uppercase text-[#2B2621]">Touch the body</h1>
-    <p class="text-xs uppercase tracking-[0.2em] text-[#8C8275] mt-2">Селективная парфюмерия & отливанты</p>
-  </header>
+<!-- ================= НАВИГАЦИЯ ================= -->
+<header class="sticky top-0 z-30 bg-[var(--paper)]/95 backdrop-blur border-b border-[var(--line)]">
+  <div class="max-w-6xl mx-auto flex items-center justify-between px-6 md:px-10 py-5">
+    <nav class="hidden md:flex gap-8 text-[11px] tracked uppercase text-[var(--taupe)]">
+      <a href="#philosophy" class="hover:text-[var(--ink)] transition">Философия</a>
+      <a href="#shop" class="hover:text-[var(--ink)] transition">Каталог</a>
+      <a href="#contact" class="hover:text-[var(--ink)] transition">Контакты</a>
+    </nav>
+    <span class="font-serif tracking-widest uppercase text-lg mx-auto md:mx-0">Touch the body</span>
+    <a href="https://t.me/AlinaVadimovna95" target="_blank" rel="noopener"
+       class="hidden md:block text-[11px] tracked uppercase text-[var(--taupe)] hover:text-[var(--ink)] transition">
+      Telegram
+    </a>
+  </div>
+</header>
 
-  <!-- Сетка с товарами -->
-  <main class="flex items-center justify-center min-h-[60vh] p-6">
-    
-    <!-- Карточка аромата -->
-    <div class="max-w-md w-full bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#EFECE6] overflow-hidden transition-all duration-500 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)]">
-      
-      <!-- Зона с изображением -->
-      <div class="relative h-80 bg-[#F5F2EB] flex items-center justify-center overflow-hidden group">
-        <img src="https://unsplash.com" 
-             alt="Byredo Bal d'Afrique" 
-             class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-        
-        <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#3A3530] text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full border border-[#EFECE6]">
-          Selective
-        </span>
+<!-- ================= ЭКРАН 1 — ГЕРОЙ ================= -->
+<section class="text-center py-20 md:py-28 px-6 border-b border-[var(--line)]">
+  <div class="dusk max-w-2xl mx-auto">
+    <p class="text-xs uppercase tracked text-[var(--taupe)] mb-6">Селективная парфюмерия & отливанты</p>
+    <h1 class="font-serif text-5xl md:text-6xl leading-tight text-[var(--ink)]">
+      Прикосновение<br>к настоящему
+    </h1>
+    <p class="text-sm md:text-base text-[var(--taupe)] mt-6 leading-relaxed max-w-md mx-auto">
+      Нишевая парфюмерия и уходовая косметика в точной дозировке — для тех,
+      кто выбирает аромат так же вдумчиво, как всё остальное в своей жизни.
+    </p>
+    <a href="#shop" class="inline-block mt-9 text-xs tracked uppercase border border-[var(--ink)] text-[var(--ink)] px-8 py-3.5 rounded-full hover:bg-[var(--ink)] hover:text-white transition">
+      Смотреть ароматы
+    </a>
+  </div>
+</section>
+
+<!-- ================= ЭКРАН 2 — ФИЛОСОФИЯ РАСПИВА ================= -->
+<section id="philosophy" class="py-24 md:py-28 px-6 md:px-10 bg-[var(--paper-2)] border-b border-[var(--line)]">
+  <div class="max-w-6xl mx-auto">
+    <div class="dusk grid md:grid-cols-[1fr_1.5fr] gap-12 md:gap-20 items-start">
+      <div>
+        <p class="text-xs uppercase tracked text-[var(--taupe)] mb-4">Философия</p>
+        <h2 class="font-serif text-3xl md:text-4xl leading-tight">
+          Почему распив —<br>это разумно
+        </h2>
       </div>
 
-      <!-- Текстовый блок -->
-      <div class="p-8">
-        <div class="mb-4">
-          <p class="text-xs uppercase tracking-widest text-[#8C8275] font-semibold mb-1">BYREDO</p>
-          <h3 class="text-3xl font-serif text-[#2B2621] tracking-wide">Bal d'Afrique</h3>
+      <div class="grid sm:grid-cols-3 gap-8 md:gap-10 pt-1">
+        <div class="dusk bg-white rounded-2xl border border-[var(--line)] p-6">
+          <span class="font-serif italic text-2xl text-[var(--taupe)]">01</span>
+          <h3 class="mt-3 text-[13px] tracked uppercase text-[var(--ink)]">Проверка перед решением</h3>
+          <p class="mt-3 text-sm text-[var(--taupe)] leading-relaxed">
+            Аромат раскрывается на коже иначе, чем на бумажной полоске. Отливант даёт неделю
+            на честное знакомство — без риска ошибиться на 200&nbsp;мл.
+          </p>
         </div>
-
-        <!-- Описание нот парфюма -->
-        <div class="space-y-2 mb-8 border-t border-b border-[#F0ECE3] py-4">
-          <p class="text-sm text-[#4E473F]"><strong class="font-medium text-[#2B2621]">Верхние ноты:</strong> Бергамот, Лимон, Нероли</p>
-          <p class="text-sm text-[#4E473F]"><strong class="font-medium text-[#2B2621]">Ноты сердца:</strong> Фиалка, Лепестки жасмина</p>
-          <p class="text-sm text-[#4E473F]"><strong class="font-medium text-[#2B2621]">Шлейф:</strong> Черная амбра, Мускус, Марокканский кедр</p>
+        <div class="dusk bg-white rounded-2xl border border-[var(--line)] p-6">
+          <span class="font-serif italic text-2xl text-[var(--taupe)]">02</span>
+          <h3 class="mt-3 text-[13px] tracked uppercase text-[var(--ink)]">Гардероб, а не флакон</h3>
+          <p class="mt-3 text-sm text-[var(--taupe)] leading-relaxed">
+            Один аромат — не приговор на сезон. Отливанты позволяют менять настроение
+            так же свободно, как выбирают наряд.
+          </p>
         </div>
-
-        <!-- Кнопки заказа (Сетка перестроена на 3 колонки) -->
-        <div>
-          <p class="text-xs uppercase tracking-widest text-[#8C8275] font-semibold mb-3">Выберите объем отливанта:</p>
-          <div class="grid grid-cols-3 gap-2">
-            
-            <!-- Кнопка 2 мл -->
-            <a href="https://t.me" 
-               target="_blank" 
-               class="flex flex-col items-center justify-center border border-[#D1C9BC] py-3 px-2 rounded-xl text-center transition-all duration-300 hover:bg-[#2B2621] hover:border-[#2B2621] hover:text-white group">
-              <span class="text-sm font-medium text-[#2B2621] group-hover:text-white">2 мл</span>
-              <span class="text-[10px] text-[#8C8275] mt-0.5 group-hover:text-white/80">В TG</span>
-            </a>
-
-            <!-- Кнопка 5 мл -->
-            <a href="https://t.me" 
-               target="_blank" 
-               class="flex flex-col items-center justify-center border border-[#D1C9BC] py-3 px-2 rounded-xl text-center transition-all duration-300 hover:bg-[#2B2621] hover:border-[#2B2621] hover:text-white group">
-              <span class="text-sm font-medium text-[#2B2621] group-hover:text-white">5 мл</span>
-              <span class="text-[10px] text-[#8C8275] mt-0.5 group-hover:text-white/80">В TG</span>
-            </a>
-
-            <!-- Кнопка 10 мл -->
-            <a href="https://t.me" 
-               target="_blank" 
-               class="flex flex-col items-center justify-center border border-[#D1C9BC] py-3 px-2 rounded-xl text-center transition-all duration-300 hover:bg-[#2B2621] hover:border-[#2B2621] hover:text-white group">
-              <span class="text-sm font-medium text-[#2B2621] group-hover:text-white">10 мл</span>
-              <span class="text-[10px] text-[#8C8275] mt-0.5 group-hover:text-white/80">В TG</span>
-            </a>
-
-          </div>
+        <div class="dusk bg-white rounded-2xl border border-[var(--line)] p-6">
+          <span class="font-serif italic text-2xl text-[var(--taupe)]">03</span>
+          <h3 class="mt-3 text-[13px] tracked uppercase text-[var(--ink)]">Точная доза, без излишков</h3>
+          <p class="mt-3 text-sm text-[var(--taupe)] leading-relaxed">
+            Мы разливаем аккуратно и герметично, вручную — вы платите за аромат,
+            а не за дизайн флакона.
+          </p>
         </div>
       </div>
-
     </div>
-  </main>
+  </div>
+</section>
 
-  <!-- Подвал сайта -->
-  <footer class="text-center py-8 text-xs text-[#8C8275] border-t border-[#EFECE6] mt-12">
+<!-- ================= ЭКРАН 3 — ВИТРИНА ================= -->
+<section id="shop" class="py-24 md:py-28 px-6 md:px-10">
+  <div class="max-w-6xl mx-auto">
+    <div class="dusk mb-14 text-center">
+      <p class="text-xs uppercase tracked text-[var(--taupe)] mb-4">Витрина</p>
+      <h2 class="font-serif text-3xl md:text-4xl text-[var(--ink)]">Три исходные точки</h2>
+      <p class="text-sm text-[var(--taupe)] mt-3 max-w-md mx-auto">
+        Ассортимент шире, чем витрина — уточняйте наличие и косметику в Telegram.
+      </p>
+    </div>
+
+    <div id="product-grid" class="grid md:grid-cols-3 gap-8"></div>
+  </div>
+</section>
+
+<!-- ================= ЭКРАН 4 — ФУТЕР ================= -->
+<footer id="contact" class="py-16 px-6 md:px-10 border-t border-[var(--line)]">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-[1.2fr_1fr_1fr] gap-10 text-center md:text-left">
+    <div class="dusk">
+      <h3 class="font-serif text-2xl mb-3 text-[var(--ink)]">Touch the body</h3>
+      <p class="text-sm text-[var(--taupe)] leading-relaxed max-w-xs mx-auto md:mx-0">
+        Парфюм на распив и уходовая косметика. Небольшая партия,
+        ручной розлив, аккуратная упаковка.
+      </p>
+    </div>
+    <div class="dusk">
+      <p class="text-xs uppercase tracked text-[var(--taupe)] mb-3">Связь</p>
+      <a href="https://t.me/AlinaVadimovna95" target="_blank" rel="noopener"
+         class="block text-base text-[var(--ink)] hover:text-[var(--taupe)] transition mb-1">Telegram — @AlinaVadimovna95</a>
+      <p class="text-sm text-[var(--taupe)]">Ответ обычно в течение дня</p>
+    </div>
+    <div class="dusk">
+      <p class="text-xs uppercase tracked text-[var(--taupe)] mb-3">Реквизиты</p>
+      <p class="text-sm text-[var(--taupe)] leading-relaxed">
+        Отливанты разлиты вручную и не являются продукцией
+        правообладателей оригинальных брендов.
+      </p>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto border-t border-[var(--line)] mt-10 pt-6 text-center text-xs text-[var(--taupe)] tracked uppercase">
     &copy; 2026 Touch the body. Все права защищены.
-  </footer>
+  </div>
+</footer>
+
+<script>
+const TELEGRAM_USERNAME = "AlinaVadimovna95";
+
+const products = [
+  {
+    brand: "BYREDO",
+    name: "Bal d'Afrique",
+    top: "Бергамот, лимон, нероли",
+    heart: "Фиалка, лепестки жасмина",
+    base: "Чёрная амбра, мускус, марокканский кедр",
+    tag: "Selective",
+    img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    brand: "TOM FORD",
+    name: "Lost Cherry",
+    top: "Чёрная вишня, горький миндаль, турецкая роза",
+    heart: "Ликёр, жасмин самбак",
+    base: "Тонка, сандал, ветивер, пачули",
+    tag: "Private Blend",
+    img: "https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    brand: "LE LABO",
+    name: "Santal 33",
+    top: "Кардамон, ирис, фиалка",
+    heart: "Папирус, амброксан",
+    base: "Сандал, кожа, кедр",
+    tag: "Cult Classic",
+    img: "https://images.unsplash.com/photo-1615368144592-6a8b6ec32aa2?q=80&w=800&auto=format&fit=crop"
+  }
+];
+
+const volumes = ["2 мл", "5 мл", "10 мл"];
+
+function buildTelegramLink(brand, name, volume){
+  const text = `Здравствуйте! Хочу заказать отливант ${brand} ${name} ${volume}`;
+  return `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(text)}`;
+}
+
+const grid = document.getElementById('product-grid');
+
+products.forEach((p) => {
+  const card = document.createElement('div');
+  card.className = "dusk card bg-white rounded-2xl border border-[var(--line)] overflow-hidden";
+  card.innerHTML = `
+    <div class="relative h-72 bg-[var(--paper-2)] overflow-hidden">
+      <img src="${p.img}" alt="${p.brand} ${p.name}" class="card-img h-full w-full object-cover">
+      <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[var(--ink)] text-[10px] font-medium tracked uppercase px-3 py-1.5 rounded-full border border-[var(--line)]">
+        ${p.tag}
+      </span>
+    </div>
+
+    <div class="p-7">
+      <p class="text-xs uppercase tracked text-[var(--taupe)] font-semibold mb-1">${p.brand}</p>
+      <h3 class="font-serif text-2xl text-[var(--ink)] tracking-wide mb-4">${p.name}</h3>
+
+      <div class="space-y-1.5 mb-6 border-t border-b border-[var(--line)] py-4">
+        <p class="text-xs text-[var(--taupe)]"><strong class="font-medium text-[var(--ink)]">Верхние ноты:</strong> ${p.top}</p>
+        <p class="text-xs text-[var(--taupe)]"><strong class="font-medium text-[var(--ink)]">Ноты сердца:</strong> ${p.heart}</p>
+        <p class="text-xs text-[var(--taupe)]"><strong class="font-medium text-[var(--ink)]">Шлейф:</strong> ${p.base}</p>
+      </div>
+
+      <p class="text-xs uppercase tracked text-[var(--taupe)] font-semibold mb-3">Выберите объём отливанта:</p>
+      <div class="grid grid-cols-3 gap-2">
+        ${volumes.map(v => `
+          <a href="${buildTelegramLink(p.brand, p.name, v)}" target="_blank" rel="noopener"
+             class="vol-btn flex flex-col items-center justify-center border border-[var(--line-2)] py-3 px-2 rounded-xl text-center">
+            <span class="vol-main text-sm font-medium text-[var(--ink)]">${v}</span>
+            <span class="vol-sub text-[10px] text-[var(--taupe)] mt-0.5">В TG</span>
+          </a>`).join('')}
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, {threshold: 0.15});
+document.querySelectorAll('.dusk').forEach(el => io.observe(el));
+</script>
 
 </body>
 </html>
