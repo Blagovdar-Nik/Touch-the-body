@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Touch the body | Парфюмерия</title>
+    <!-- Подключаем дизайн Tailwind CSS -->
+    <script src="https://tailwindcss.com"></script>
+    <style>
+        @import url('https://googleapis.com');
+        .font-serif { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#FDFBF7] text-[#2B2621]">
+
+  <!-- Шапка сайта (Логотип) -->
+  <header class="text-center py-12 border-b border-[#EFECE6]">
+    <h1 class="text-4xl font-serif tracking-widest uppercase text-[#2B2621]">Touch the body</h1>
+    <p class="text-xs uppercase tracking-[0.2em] text-[#8C8275] mt-2">Селективная парфюмерия & отливанты</p>
+  </header>
+
+  <!-- Сетка с товарами -->
+  <main class="flex items-center justify-center min-h-[70vh] p-6">
+    
+    <!-- Карточка аромата -->
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#EFECE6] overflow-hidden transition-all duration-500 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)]">
+      
+      <!-- Зона с изображением -->
+      <div class="relative h-80 bg-[#F5F2EB] flex items-center justify-center overflow-hidden group">
+        <img src="https://unsplash.com" 
+             alt="Byredo Bal d'Afrique" 
+             class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        
+        <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#3A3530] text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full border border-[#EFECE6]">
+          Selective
+        </span>
+      </div>
+
+      <!-- Текстовый блок -->
+      <div class="p-8">
+        <div class="mb-4">
+          <p class="text-xs uppercase tracking-widest text-[#8C8275] font-semibold mb-1">BYREDO</p>
+          <h3 class="text-3xl font-serif text-[#2B2621] tracking-wide">Bal d'Afrique</h3>
+        </div>
+
+        <!-- Описание нот парфюма -->
+        <div class="space-y-2 mb-8 border-t border-b border-[#F0ECE3] py-4">
+          <p class="text-sm text-[#4E473F]"><strong class="font-medium text-[#2B2621]">Верхние ноты:</strong> Бергамот, Лимон, Нероли</p>
+          <p class="text-sm text-[#4E473F]"><strong class="font-medium text-[#2B2621]">Ноты сердца:</strong> Фиалка, Лепестки жасмина</p>
+          <p class="text-sm text-[#4E473F]"><strong class="font-medium text-[#2B2621]">Шлейф:</strong> Черная амбра, Мускус, Марокканский кедр</p>
+        </div>
+
+        <!-- Кнопки заказа -->
+        <div>
+          <p class="text-xs uppercase tracking-widest text-[#8C8275] font-semibold mb-3">Выберите объем отливанта:</p>
+          <div class="grid grid-cols-2 gap-4">
+            
+            <!-- Кнопка 5 мл -->
+            <a href="https://t.me" 
+               target="_blank" 
+               class="flex flex-col items-center justify-center border border-[#D1C9BC] py-3.5 px-4 rounded-xl text-center transition-all duration-300 hover:bg-[#2B2621] hover:border-[#2B2621] hover:text-white group">
+              <span class="text-base font-medium text-[#2B2621] group-hover:text-white">5 мл</span>
+              <span class="text-xs text-[#8C8275] mt-0.5 group-hover:text-white/80">Заказать в TG</span>
+            </a>
+
+            <!-- Кнопка 10 мл -->
+            <a href="https://t.me" 
+               target="_blank" 
+               class="flex flex-col items-center justify-center border border-[#D1C9BC] py-3.5 px-4 rounded-xl text-center transition-all duration-300 hover:bg-[#2B2621] hover:border-[#2B2621] hover:text-white group">
+              <span class="text-base font-medium text-[#2B2621] group-hover:text-white">10 мл</span>
+              <span class="text-xs text-[#8C8275] mt-0.5 group-hover:text-white/80">Заказать в TG</span>
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Подвал сайта -->
+  <footer class="text-center py-8 text-xs text-[#8C8275] border-t border-[#EFECE6] mt-12">
+    &copy; 2026 Touch the body. Все права защищены.
+  </footer>
+
+</body>
+</html>
