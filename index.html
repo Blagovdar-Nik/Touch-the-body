@@ -6,7 +6,7 @@
 <title>Touch the body | Селективная парфюмерия & отливанты</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Marck+Script&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#FDFBF7;
@@ -24,6 +24,8 @@
     font-weight:400;
   }
   .font-serif{ font-family:'Playfair Display', serif; }
+  .font-script{ font-family:'Allura', cursive; font-weight:400; letter-spacing:.01em; }
+  .font-script-ru{ font-family:'Marck Script', cursive; font-weight:400; }
   .tracked{ letter-spacing:.18em; }
 
   .dusk{
@@ -48,6 +50,51 @@
   .vol-btn:hover{ background:var(--ink); border-color:var(--ink); }
   .vol-btn:hover .vol-sub, .vol-btn:hover .vol-main{ color:#fff; }
 
+  /* бейджи — по мотивам Orental: Хит / Новинка / Скидка */
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:5px 10px;
+    border-radius:999px;
+    backdrop-filter:blur(4px);
+  }
+  .badge--hit{ background:var(--ink); color:#fff; }
+  .badge--new{ background:#fff; color:var(--ink); border:1px solid var(--line-2); }
+  .badge--sale{ background:#B5651D; color:#fff; }
+
+  /* карусель героя */
+  .hero-slide{
+    position:absolute; inset:0;
+    opacity:0;
+    transition: opacity .8s ease;
+    pointer-events:none;
+  }
+  .hero-slide.is-active{ opacity:1; pointer-events:auto; }
+  .hero-slide__img{
+    position:absolute; inset:0;
+    background-size:cover; background-position:center;
+  }
+  .hero-slide__video{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+  }
+  .hero-slide__scrim{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(43,38,33,0.15) 0%, rgba(43,38,33,0.55) 100%);
+  }
+  .hero-dot{
+    width:8px; height:8px; border-radius:999px;
+    background:rgba(255,255,255,0.5);
+    transition: background .3s ease, width .3s ease;
+  }
+  .hero-dot.is-active{ background:#fff; width:22px; }
+
   @media (prefers-reduced-motion: reduce){
     .dusk{opacity:1; transform:none; transition:none;}
     html{scroll-behavior:auto;}
@@ -64,7 +111,7 @@
       <a href="#shop" class="hover:text-[var(--ink)] transition">Каталог</a>
       <a href="#contact" class="hover:text-[var(--ink)] transition">Контакты</a>
     </nav>
-    <span class="font-serif tracking-widest uppercase text-lg mx-auto md:mx-0">Touch the body</span>
+    <span class="font-script text-3xl font-bold mx-auto md:mx-0" style="-webkit-text-stroke: 0.4px var(--ink);">Touch the body</span>
     <a href="https://t.me/AlinaVadimovna95" target="_blank" rel="noopener"
        class="hidden md:block text-[11px] tracked uppercase text-[var(--taupe)] hover:text-[var(--ink)] transition">
       Telegram
@@ -72,21 +119,22 @@
   </div>
 </header>
 
-<!-- ================= ЭКРАН 1 — ГЕРОЙ ================= -->
-<section class="text-center py-20 md:py-28 px-6 border-b border-[var(--line)]">
-  <div class="dusk max-w-2xl mx-auto">
-    <p class="text-xs uppercase tracked text-[var(--taupe)] mb-6">Селективная парфюмерия & отливанты</p>
-    <h1 class="font-serif text-5xl md:text-6xl leading-tight text-[var(--ink)]">
-      Прикосновение<br>к настоящему
-    </h1>
-    <p class="text-sm md:text-base text-[var(--taupe)] mt-6 leading-relaxed max-w-md mx-auto">
-      Нишевая парфюмерия и уходовая косметика в точной дозировке — для тех,
-      кто выбирает аромат так же вдумчиво, как всё остальное в своей жизни.
-    </p>
-    <a href="#shop" class="inline-block mt-9 text-xs tracked uppercase border border-[var(--ink)] text-[var(--ink)] px-8 py-3.5 rounded-full hover:bg-[var(--ink)] hover:text-white transition">
-      Смотреть ароматы
-    </a>
+<!-- ================= ЭКРАН 1 — ГЕРОЙ (карусель) ================= -->
+<section class="relative border-b border-[var(--line)] overflow-hidden">
+  <div id="hero-carousel" class="relative h-[560px] md:h-[640px]">
+    <!-- слайды рендерятся скриптом ниже -->
   </div>
+
+  <!-- стрелки -->
+  <button id="hero-prev" aria-label="Назад" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/85 backdrop-blur border border-[var(--line)] flex items-center justify-center hover:bg-white transition">
+    <span class="text-lg">←</span>
+  </button>
+  <button id="hero-next" aria-label="Вперёд" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/85 backdrop-blur border border-[var(--line)] flex items-center justify-center hover:bg-white transition">
+    <span class="text-lg">→</span>
+  </button>
+
+  <!-- точки -->
+  <div id="hero-dots" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2"></div>
 </section>
 
 <!-- ================= ЭКРАН 2 — ФИЛОСОФИЯ РАСПИВА ================= -->
@@ -135,13 +183,20 @@
   <div class="max-w-6xl mx-auto">
     <div class="dusk mb-14 text-center">
       <p class="text-xs uppercase tracked text-[var(--taupe)] mb-4">Витрина</p>
-      <h2 class="font-serif text-3xl md:text-4xl text-[var(--ink)]">Три исходные точки</h2>
+      <h2 class="font-serif text-3xl md:text-4xl text-[var(--ink)]">Исходные точки</h2>
       <p class="text-sm text-[var(--taupe)] mt-3 max-w-md mx-auto">
         Ассортимент шире, чем витрина — уточняйте наличие и косметику в Telegram.
       </p>
     </div>
 
     <div id="product-grid" class="grid md:grid-cols-3 gap-8"></div>
+
+    <div class="dusk in mt-14 flex flex-col items-center gap-4">
+      <button id="load-more" class="text-xs tracked uppercase border border-[var(--ink)] text-[var(--ink)] px-10 py-3.5 rounded-full hover:bg-[var(--ink)] hover:text-white transition">
+        Показать ещё
+      </button>
+      <p id="shop-count" class="text-xs text-[var(--taupe)]"></p>
+    </div>
   </div>
 </section>
 
@@ -149,7 +204,7 @@
 <footer id="contact" class="py-16 px-6 md:px-10 border-t border-[var(--line)]">
   <div class="max-w-6xl mx-auto grid md:grid-cols-[1.2fr_1fr_1fr] gap-10 text-center md:text-left">
     <div class="dusk">
-      <h3 class="font-serif text-2xl mb-3 text-[var(--ink)]">Touch the body</h3>
+      <h3 class="font-script text-4xl mb-3 text-[var(--ink)]">Touch the body</h3>
       <p class="text-sm text-[var(--taupe)] leading-relaxed max-w-xs mx-auto md:mx-0">
         Парфюм на распив и уходовая косметика. Небольшая партия,
         ручной розлив, аккуратная упаковка.
@@ -177,37 +232,135 @@
 <script>
 const TELEGRAM_USERNAME = "AlinaVadimovna95";
 
-const products = [
+/* ===================== Карусель героя ===================== */
+const heroSlides = [
   {
-    brand: "BYREDO",
-    name: "Bal d'Afrique",
-    top: "Бергамот, лимон, нероли",
-    heart: "Фиалка, лепестки жасмина",
-    base: "Чёрная амбра, мускус, марокканский кедр",
-    tag: "Selective",
-    img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=800&auto=format&fit=crop"
+    img: "https://images.pexels.com/videos/8447605/pexels-photo-8447605.jpeg?auto=compress&w=1600",
+    video: "https://videos.pexels.com/video-files/8447605/8447605-uhd_2732_1440_25fps.mp4",
+    eyebrow: "Селективная парфюмерия & отливанты",
+    title: "Прикосновение к настоящему",
+    text: "Нишевая парфюмерия и уходовая косметика в точной дозировке — для тех, кто выбирает аромат так же вдумчиво, как всё остальное в своей жизни.",
+    cta: "Смотреть ароматы"
   },
   {
-    brand: "TOM FORD",
-    name: "Lost Cherry",
-    top: "Чёрная вишня, горький миндаль, турецкая роза",
-    heart: "Ликёр, жасмин самбак",
-    base: "Тонка, сандал, ветивер, пачули",
-    tag: "Private Blend",
-    img: "https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=800&auto=format&fit=crop"
+    img: "https://images.pexels.com/videos/8447510/pexels-photo-8447510.jpeg?auto=compress&w=1600",
+    video: "https://videos.pexels.com/video-files/8447510/8447510-uhd_2732_1440_25fps.mp4",
+    eyebrow: "Новинка недели",
+    title: "Tom Ford — Lost Cherry",
+    text: "Гурманский, бархатный вечерний аромат. Попробуйте на 2 мл, прежде чем решиться на полный флакон.",
+    cta: "Заказать отливант"
   },
   {
-    brand: "LE LABO",
-    name: "Santal 33",
-    top: "Кардамон, ирис, фиалка",
-    heart: "Папирус, амброксан",
-    base: "Сандал, кожа, кедр",
-    tag: "Cult Classic",
-    img: "https://images.unsplash.com/photo-1615368144592-6a8b6ec32aa2?q=80&w=800&auto=format&fit=crop"
+    img: "https://images.pexels.com/videos/8447657/pexels-photo-8447657.jpeg?auto=compress&w=1600",
+    video: "https://videos.pexels.com/video-files/8447657/8447657-uhd_1440_2732_25fps.mp4",
+    eyebrow: "Культовая классика",
+    title: "Le Labo — Santal 33",
+    text: "Древесный, сдержанно-кожаный характер, который узнают с первого вдоха.",
+    cta: "Смотреть ароматы"
   }
 ];
 
+const heroTrack = document.getElementById('hero-carousel');
+const heroDots = document.getElementById('hero-dots');
+let heroIndex = 0;
+let heroTimer;
+
+heroSlides.forEach((s, i) => {
+  const slide = document.createElement('div');
+  slide.className = "hero-slide" + (i === 0 ? " is-active" : "");
+
+  const bg = s.video
+    ? `<video class="hero-slide__video" src="${s.video}" poster="${s.img}" autoplay muted loop playsinline></video>`
+    : `<div class="hero-slide__img" style="background-image:url('${s.img}')"></div>`;
+
+  slide.innerHTML = `
+    ${bg}
+    <div class="hero-slide__scrim"></div>
+    <div class="relative z-10 h-full flex items-end md:items-center">
+      <div class="max-w-2xl px-6 md:px-16 pb-16 md:pb-0 text-white">
+        <p class="text-xs uppercase tracked text-white/80 mb-4">${s.eyebrow}</p>
+        <h1 class="font-script-ru text-5xl md:text-7xl leading-tight mb-5">${s.title}</h1>
+        <p class="text-sm md:text-base text-white/85 leading-relaxed max-w-md mb-8">${s.text}</p>
+        <a href="#shop" class="inline-block text-xs tracked uppercase border border-white text-white px-8 py-3.5 rounded-full hover:bg-white hover:text-[var(--ink)] transition">${s.cta}</a>
+      </div>
+    </div>
+  `;
+  heroTrack.appendChild(slide);
+
+  const dot = document.createElement('button');
+  dot.className = "hero-dot" + (i === 0 ? " is-active" : "");
+  dot.setAttribute('aria-label', `Слайд ${i+1}`);
+  dot.addEventListener('click', () => goToHero(i));
+  heroDots.appendChild(dot);
+});
+
+function goToHero(i){
+  const slides = heroTrack.querySelectorAll('.hero-slide');
+  const dots = heroDots.querySelectorAll('.hero-dot');
+  slides[heroIndex].classList.remove('is-active');
+  dots[heroIndex].classList.remove('is-active');
+  heroIndex = (i + heroSlides.length) % heroSlides.length;
+  slides[heroIndex].classList.add('is-active');
+  dots[heroIndex].classList.add('is-active');
+  resetHeroTimer();
+}
+
+function resetHeroTimer(){
+  clearInterval(heroTimer);
+  heroTimer = setInterval(() => goToHero(heroIndex + 1), 5500);
+}
+
+document.getElementById('hero-prev').addEventListener('click', () => goToHero(heroIndex - 1));
+document.getElementById('hero-next').addEventListener('click', () => goToHero(heroIndex + 1));
+resetHeroTimer();
+
+/* ===================== Товары ===================== */
+
+const IMGS = [
+  "https://images.unsplash.com/photo-1758225502621-9102d2856dc8?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1709662369900-130507781728?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1749264361617-dbe17a223f54?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1618436917143-548beebc58e5?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1588163282942-bdc63a1d57ab?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=800&auto=format&fit=crop"
+];
+
+const products = [
+  { brand:"BYREDO", name:"Bal d'Afrique", top:"Бергамот, лимон", heart:"Африканский бархатцы, фиалка", base:"Мускус, кедр, ветивер", tag:"Selective", img:IMGS[0], badges:[{type:"hit",label:"Хит"}] },
+  { brand:"TOM FORD", name:"Lost Cherry", top:"Чёрная вишня, горький миндаль, турецкая роза", heart:"Ликёр, жасмин самбак", base:"Тонка, сандал, ветивер, пачули", tag:"Private Blend", img:IMGS[1], badges:[{type:"new",label:"Новинка"},{type:"sale",label:"−10%"}] },
+  { brand:"LE LABO", name:"Santal 33", top:"Кардамон, ирис, фиалка", heart:"Папирус, амброксан", base:"Сандал, кожа, кедр", tag:"Cult Classic", img:IMGS[2], badges:[{type:"hit",label:"Хит"},{type:"new",label:"Новинка"}] },
+  { brand:"MAISON FRANCIS KURKDJIAN", name:"Baccarat Rouge 540", top:"Жасмин, шафран", heart:"Амбровое дерево, серая амбра", base:"Пихтовая смола, кедр", tag:"Signature", img:IMGS[3] },
+  { brand:"DIPTYQUE", name:"Philosykos", top:"Инжирный лист, зелень", heart:"Инжир, кокос", base:"Кедр, древесные ноты", tag:"Green", img:IMGS[4] },
+  { brand:"JO MALONE", name:"Wood Sage & Sea Salt", top:"Семена амбретты", heart:"Морская соль", base:"Шалфей, древесные ноты", tag:"Cologne", img:IMGS[5] },
+  { brand:"CREED", name:"Aventus", top:"Ананас, бергамот, чёрная смородина", heart:"Берёза, пачули, жасмин", base:"Мускус, дубовый мох, амбра, ваниль", tag:"Icon", img:IMGS[0], badges:[{type:"hit",label:"Хит"}] },
+  { brand:"CHANEL", name:"Coco Mademoiselle", top:"Апельсин, бергамот", heart:"Жасмин, роза, личи", base:"Пачули, ветивер, ваниль", tag:"Maison", img:IMGS[1] },
+  { brand:"DIOR", name:"Sauvage", top:"Бергамот, перец", heart:"Сычуаньский перец, лаванда, герань", base:"Амброксан, кедр, лабданум", tag:"Maison", img:IMGS[2] },
+  { brand:"YVES SAINT LAURENT", name:"Black Opium", top:"Груша, розовый перец, флёрдоранж", heart:"Кофе, жасмин, горький миндаль", base:"Ваниль, пачули, кедр", tag:"Gourmand", img:IMGS[3], badges:[{type:"new",label:"Новинка"}] },
+  { brand:"GUERLAIN", name:"Shalimar", top:"Бергамот, лимон", heart:"Ирис, жасмин, роза", base:"Ваниль, тонка, амбра", tag:"Heritage", img:IMGS[4] },
+  { brand:"AMOUAGE", name:"Interlude Man", top:"Орегано, бергамот, перец", heart:"Ладан, корица, гвоздика", base:"Амбра, пачули, лабданум", tag:"Extrait", img:IMGS[5] },
+  { brand:"XERJOFF", name:"Naxos", top:"Лаванда, бергамот", heart:"Мёд, табак", base:"Ваниль, тонка", tag:"Casamorati", img:IMGS[0] },
+  { brand:"FREDERIC MALLE", name:"Portrait Of A Lady", top:"Малина, корица", heart:"Роза, пачули", base:"Сандал, ладан", tag:"Editions de Parfums", img:IMGS[1], badges:[{type:"hit",label:"Хит"}] },
+  { brand:"KILIAN", name:"Straight To Heaven", top:"Ром, корица", heart:"Кожа, табак", base:"Пачули, бензоин", tag:"Arabian Nights", img:IMGS[2] },
+  { brand:"PARFUMS DE MARLY", name:"Layton", top:"Яблоко, бергамот, лаванда", heart:"Герань, фиалка, жасмин", base:"Ваниль, сандал", tag:"Bestseller", img:IMGS[3], badges:[{type:"hit",label:"Хит"}] },
+  { brand:"INITIO", name:"Oud For Greatness", top:"Уд, шафран", heart:"Мускатный орех, лаванда", base:"Сандал, кедр", tag:"Prives", img:IMGS[4] },
+  { brand:"MANCERA", name:"Cedrat Boise", top:"Цитрусы, кедр", heart:"Мускус", base:"Древесные ноты, амбра", tag:"Niche", img:IMGS[5] },
+  { brand:"MONTALE", name:"Intense Cafe", top:"Кофе, бергамот", heart:"Какао, жасмин", base:"Ваниль, тонка", tag:"Gourmand", img:IMGS[0] },
+  { brand:"NISHANE", name:"Hacivat", top:"Бергамот, чёрный перец", heart:"Инжирный лист, роза", base:"Мускус, кедр", tag:"Istanbul", img:IMGS[1] },
+  { brand:"ROJA PARFUMS", name:"Elysium", top:"Бергамот, мандарин", heart:"Роза, жасмин", base:"Сандал, мускус", tag:"Haute Parfumerie", img:IMGS[2] },
+  { brand:"CAROLINA HERRERA", name:"Good Girl", top:"Миндаль, кофе", heart:"Тубероза, жасмин", base:"Тонка, какао", tag:"Maison", img:IMGS[3] },
+  { brand:"GIORGIO ARMANI", name:"Si", top:"Нектар чёрной смородины, мандарин", heart:"Роза, фрезия", base:"Ваниль, пачули, мускус", tag:"Maison", img:IMGS[4] },
+  { brand:"VALENTINO", name:"Born In Roma", top:"Бергамот, чёрный перец", heart:"Жасмин, белый мускус", base:"Ваниль, древесные ноты", tag:"Maison", img:IMGS[5] },
+  { brand:"PRADA", name:"Paradoxe", top:"Флёрдоранж", heart:"Жасмин", base:"Амбра, мускус", tag:"Maison", img:IMGS[0], badges:[{type:"new",label:"Новинка"}] },
+  { brand:"HERMÈS", name:"Terre D'Hermès", top:"Грейпфрут, апельсин", heart:"Перец, герань", base:"Ветивер, кедр, бензоин", tag:"Maison", img:IMGS[1] },
+  { brand:"CHANEL", name:"Bleu De Chanel", top:"Грейпфрут, лимон, мята", heart:"Имбирь, мускатный орех, жасмин", base:"Ладан, ветивер, кедр, сандал", tag:"Maison", img:IMGS[2], badges:[{type:"hit",label:"Хит"}] },
+  { brand:"VERSACE", name:"Eros", top:"Мята, зелёное яблоко, лимон", heart:"Тонка, герань, амброксан", base:"Ваниль, ветивер, дубовый мох", tag:"Maison", img:IMGS[3] },
+  { brand:"XERJOFF", name:"Erba Pura", top:"Бергамот, красные ягоды", heart:"Кокос, жасмин", base:"Мускус, сандал", tag:"Casamorati", img:IMGS[4] },
+  { brand:"NARCISO RODRIGUEZ", name:"For Her", top:"Персик, кумкват", heart:"Мускус, орхидея", base:"Амбра, пачули", tag:"Maison", img:IMGS[5] }
+];
+
 const volumes = ["2 мл", "5 мл", "10 мл"];
+const BATCH = 9;
+let shown = 0;
 
 function buildTelegramLink(brand, name, volume){
   const text = `Здравствуйте! Хочу заказать отливант ${brand} ${name} ${volume}`;
@@ -215,8 +368,17 @@ function buildTelegramLink(brand, name, volume){
 }
 
 const grid = document.getElementById('product-grid');
+const loadMoreBtn = document.getElementById('load-more');
+const shopCount = document.getElementById('shop-count');
 
-products.forEach((p) => {
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, {threshold: 0.15});
+
+// наблюдаем за уже существующими на странице блоками (философия, футер и т.д.)
+document.querySelectorAll('.dusk').forEach(el => io.observe(el));
+
+function renderCard(p){
   const card = document.createElement('div');
   card.className = "dusk card bg-white rounded-2xl border border-[var(--line)] overflow-hidden";
   card.innerHTML = `
@@ -225,6 +387,10 @@ products.forEach((p) => {
       <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[var(--ink)] text-[10px] font-medium tracked uppercase px-3 py-1.5 rounded-full border border-[var(--line)]">
         ${p.tag}
       </span>
+      ${p.badges && p.badges.length ? `
+      <div class="absolute top-4 right-4 flex flex-col gap-1.5 items-end">
+        ${p.badges.map(b => `<span class="badge badge--${b.type}">${b.label}</span>`).join('')}
+      </div>` : ''}
     </div>
 
     <div class="p-7">
@@ -249,12 +415,22 @@ products.forEach((p) => {
     </div>
   `;
   grid.appendChild(card);
-});
+  io.observe(card);
+  requestAnimationFrame(() => card.classList.add('in'));
+}
 
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
-}, {threshold: 0.15});
-document.querySelectorAll('.dusk').forEach(el => io.observe(el));
+function loadMore(){
+  const next = products.slice(shown, shown + BATCH);
+  next.forEach(renderCard);
+  shown += next.length;
+  if (shopCount) shopCount.textContent = `Показано ${shown} из ${products.length}`;
+  if (shown >= products.length && loadMoreBtn){
+    loadMoreBtn.style.display = 'none';
+  }
+}
+
+loadMore();
+if (loadMoreBtn) loadMoreBtn.addEventListener('click', loadMore);
 </script>
 
 </body>
